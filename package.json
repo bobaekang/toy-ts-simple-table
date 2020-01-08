@@ -1,0 +1,17 @@
+{
+  "name": "toy-ts-simple-table",
+  "version": "0.0.1",
+  "description": "Experimenting to model a table as collection of rows with variables and values in TS",
+  "scripts": {
+    "build": "tsc --build",
+    "serve": "ts-node ./src",
+    "start": "node ./dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bobae Kang",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
+}
