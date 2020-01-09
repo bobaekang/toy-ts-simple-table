@@ -58,27 +58,25 @@ export const select = (tbl: Table, ...varNames: string[]): Table => {
 }
 
 export const sortBy = (tbl: Table, by: string, order: string = "asc"): Table => {
-  return tbl.sort((ri, rj) => {
-    let vi = {} as Variable
-    let vj = {} as Variable
+  const compare = (a: Row, b: Row): number => {
+    let va = toInt(0)
+    let vb = toInt(0)
 
-    ri.variables.forEach(v => {
-      if (v.name == by) vi = v
+    a.variables.forEach(v => {
+      if (v.name == by) va = v.value
     })
 
-    rj.variables.forEach(v => {
-      if (v.name == by) vj = v
+    b.variables.forEach(v => {
+      if (v.name == by) vb = v.value
     })
 
-    const ri_before_rj =
-      order == "desc" ? vi.value - vj.value : vj.value - vi.value
-    const ri_after_rj =
-      order == "desc" ? vj.value - vi.value : vj.value - vj.value
+    return order === "desc" ? vb - va : va - vb
+  }
 
-    if (ri_before_rj) return -1
-    else if (ri_after_rj) return 1
-    else return 0
-  })
+  return tbl
+    .map((row, index) => ({ row, index }))
+    .sort((a, b) => compare(a.row, b.row) || a.index - b.index)
+    .map(({ row }) => row)
 }
 
 export const flatten = (tbl: Table): TableDTO => {
