@@ -111,50 +111,74 @@ const Unflatten = (tbl: TableDTO): Table => {
   })
 }
 
+const FetchFromDB = async (db: any): Promise<Table> => {  
+  return new Promise((resolve, reject) => {
+    db.serialize(() => {
+      db.all("SELECT * FROM Data", (err: any, rows: any) => {
+        if (err) reject("Error: SQLite")
+        else resolve(Unflatten(rows))
+      })
+    })
+  })
+}
+
+
 // try
-const sampleTable: Table = [
-  {
-    variables: [
-      {name: "a", value: 1} as Variable,
-      {name: "b", value: 1} as Variable
-    ],
-    value: toInt(1)
-  },
-  {
-    variables: [
-      {name: "a", value: 1} as Variable,
-      {name: "b", value: 2} as Variable
-    ],
-    value: toInt(2)
-  },
-  {
-    variables: [
-      {name: "a", value: 2} as Variable,
-      {name: "b", value: 1} as Variable
-    ],
-    value: toInt(3)
-  },
-  {
-    variables: [
-      {name: "a", value: 2} as Variable,
-      {name: "b", value: 2} as Variable
-    ],
-    value: toInt(4)
-  },
-]
+const main = async () => {
+  const sampleTable: Table = [
+    {
+      variables: [
+        {name: "a", value: 1} as Variable,
+        {name: "b", value: 1} as Variable
+      ],
+      value: toInt(1)
+    },
+    {
+      variables: [
+        {name: "a", value: 1} as Variable,
+        {name: "b", value: 2} as Variable
+      ],
+      value: toInt(2)
+    },
+    {
+      variables: [
+        {name: "a", value: 2} as Variable,
+        {name: "b", value: 1} as Variable
+      ],
+      value: toInt(3)
+    },
+    {
+      variables: [
+        {name: "a", value: 2} as Variable,
+        {name: "b", value: 2} as Variable
+      ],
+      value: toInt(4)
+    },
+  ]
 
-const prettyPrint = (name: string, obj: any) =>
-  console.log(name + '\n' + JSON.stringify(obj, null, 2) + '\n')
+  const sqlite3 = require('sqlite3').verbose()
+  const db = new sqlite3.Database("./data.db")
 
-const filtered = Filter(sampleTable, "a", "==", toInt(1))
-const sorted = SortBy(sampleTable, "b")
-const selected = Select(sampleTable, "a")
-const flattened = Flatten(sampleTable)
-const unflattened = Unflatten(flattened)
+  const prettyPrint = (name: string, obj: any) =>
+    console.log(name + '\n' + JSON.stringify(obj, null, 2) + '\n')
 
-prettyPrint("sample", sampleTable)
-prettyPrint("filtered: a == 1", filtered)
-prettyPrint("sorted by: b(asc)", sorted)
-prettyPrint("selected: a", selected)
-prettyPrint("flattened", flattened)
-prettyPrint("unflattened", unflattened)
+  const filtered = Filter(sampleTable, "a", "==", toInt(1))
+  const sorted = SortBy(sampleTable, "b")
+  const selected = Select(sampleTable, "a")
+  const flattened = Flatten(sampleTable)
+  const unflattened = Unflatten(flattened)
+  const fetched = await FetchFromDB(db)
+
+  db.close()
+
+
+  prettyPrint("sample", sampleTable)
+  prettyPrint("filtered: a == 1", filtered)
+  prettyPrint("sorted by: b(asc)", sorted)
+  prettyPrint("selected: a", selected)
+  prettyPrint("flattened", flattened)
+  prettyPrint("unflattened", unflattened)
+  prettyPrint("fetched from DB", fetched)
+}
+
+main()
