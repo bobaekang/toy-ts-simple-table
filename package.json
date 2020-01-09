@@ -12,7 +12,11 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^13.1.4",
+    "@types/sqlite3": "^3.1.6",
     "ts-node": "^8.5.4",
     "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "sqlite3": "^4.1.1"
   }
 }
