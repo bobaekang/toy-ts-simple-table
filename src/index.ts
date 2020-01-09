@@ -16,7 +16,7 @@ type Table = Row[]
 type TableDTO = any[]
 
 // Table functions
-const Filter = function(tbl: Table, by: string, matchIf: string, value: Int): Table {
+const filter = function(tbl: Table, by: string, matchIf: string, value: Int): Table {
   return tbl.filter(r => {
     let match = false
 
@@ -46,7 +46,7 @@ const Filter = function(tbl: Table, by: string, matchIf: string, value: Int): Ta
   })
 }
 
-const Select = function(tbl: Table, ...varNames: string[]): Table {
+const select = function(tbl: Table, ...varNames: string[]): Table {
   return tbl.map(r => {
     let selected = r.variables.filter(v => varNames.includes(v.name))
     
@@ -57,7 +57,7 @@ const Select = function(tbl: Table, ...varNames: string[]): Table {
   })
 }
 
-const SortBy = function(tbl: Table, by: string, order: string = "asc"): Table {
+const sortBy = function(tbl: Table, by: string, order: string = "asc"): Table {
   return tbl.sort((ri, rj) => {
     let vi = {} as Variable
     let vj = {} as Variable
@@ -80,7 +80,7 @@ const SortBy = function(tbl: Table, by: string, order: string = "asc"): Table {
     else return 0
   })
 }
-const Flatten = (tbl: Table): TableDTO => {
+const flatten = (tbl: Table): TableDTO => {
   return tbl.map(row => {
     const flatRow = {} as any
 
@@ -94,7 +94,7 @@ const Flatten = (tbl: Table): TableDTO => {
   })
 }
 
-const Unflatten = (tbl: TableDTO): Table => {
+const unflatten = (tbl: TableDTO): Table => {
   return tbl.map(flatRow => {
     let variables = [] as Variable[]
     let value = toInt(0)
@@ -111,12 +111,12 @@ const Unflatten = (tbl: TableDTO): Table => {
   })
 }
 
-const FetchFromDB = async (db: any): Promise<Table> => {  
+const fetchFromDB = async (db: any): Promise<Table> => {  
   return new Promise((resolve, reject) => {
     db.serialize(() => {
       db.all("SELECT * FROM Data", (err: any, rows: any) => {
         if (err) reject("Error: SQLite")
-        else resolve(Unflatten(rows))
+        else resolve(unflatten(rows))
       })
     })
   })
@@ -162,12 +162,12 @@ const main = async () => {
   const prettyPrint = (name: string, obj: any) =>
     console.log(name + '\n' + JSON.stringify(obj, null, 2) + '\n')
 
-  const filtered = Filter(sampleTable, "a", "==", toInt(1))
-  const sorted = SortBy(sampleTable, "b")
-  const selected = Select(sampleTable, "a")
-  const flattened = Flatten(sampleTable)
-  const unflattened = Unflatten(flattened)
-  const fetched = await FetchFromDB(db)
+  const filtered = filter(sampleTable, "a", "==", toInt(1))
+  const sorted = sortBy(sampleTable, "b")
+  const selected = select(sampleTable, "a")
+  const flattened = flatten(sampleTable)
+  const unflattened = unflatten(flattened)
+  const fetched = await fetchFromDB(db)
 
   db.close()
 
