@@ -58,7 +58,7 @@ const sampleTableDTO: TableDTO = [
 ]
 
 describe('filter', () => {
-  describe('by A, matchIf ==, value 1', () => {
+  describe('by: A, matchIf: ==, value: 1', () => {
     it('should return a filtered Table only with Rows where variable A == 1', () => {
       const actual = filter(sampleTable, 'A', '==', toInt(1))
       const expected: Table = [
@@ -82,7 +82,7 @@ describe('filter', () => {
     })
   })
 
-  describe('by A, matchIf <=, value 1', () => {
+  describe('by: A, matchIf: <=, value: 1', () => {
     it('should return a filtered Table only with Rows where variable A <= 1', () => {
       const actual = filter(sampleTable, 'A', '<=', toInt(1))
       const expected: Table = [
@@ -106,7 +106,7 @@ describe('filter', () => {
     })
   })
 
-  describe('by A, matchIf >=, value 2', () => {
+  describe('by: A, matchIf: >=, value: 2', () => {
     it('should return a filtered Table only with Rows where variable A >= 2', () => {
       const actual = filter(sampleTable, 'A', '>=', toInt(2))
       const expected: Table = [
@@ -130,7 +130,7 @@ describe('filter', () => {
     })
   })
 
-  describe('by B, matchIf <, value 2', () => {
+  describe('by: B, matchIf: <, value: 2', () => {
     it('should return a filtered Table only with Rows where variable B < 2', () => {
       const actual = filter(sampleTable, 'B', '<', toInt(2))
       const expected: Table = [
@@ -154,7 +154,7 @@ describe('filter', () => {
     })
   })
 
-  describe('by B, matchIf >, value 1', () => {
+  describe('by: B, matchIf: >, value: 1', () => {
     it('should return a filtered Table only with Rows where variable B > 1', () => {
       const actual = filter(sampleTable, 'B', '>', toInt(1))
       const expected: Table = [
