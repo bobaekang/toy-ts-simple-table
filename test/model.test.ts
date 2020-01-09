@@ -214,7 +214,7 @@ describe('sortBy', () => {
         },
       ]
 
-      assert.equal(actual, expected)
+      assert.deepEqual(actual, expected)
     })
   })
 
@@ -252,7 +252,7 @@ describe('sortBy', () => {
         },
       ]
 
-      assert.equal(actual, expected)
+      assert.deepEqual(actual, expected)
     })
   })
 
@@ -290,7 +290,7 @@ describe('sortBy', () => {
         },
       ]
 
-      assert.equal(actual, expected)
+      assert.deepEqual(actual, expected)
     })
   })
 })
