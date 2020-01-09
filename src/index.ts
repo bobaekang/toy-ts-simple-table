@@ -16,13 +16,13 @@ type Table = Row[]
 type TableDTO = any[]
 
 // Table functions
-const filter = function(tbl: Table, by: string, matchIf: string, value: Int): Table {
+const filter = (tbl: Table, by: string, matchIf: string, value: Int): Table => {
   return tbl.filter(r => {
     let match = false
 
     r.variables.some(v => {
       if (v.name == by) {
-        switch(matchIf) {
+        switch (matchIf) {
           case "==":
             match = v.value == value
             break
@@ -46,10 +46,10 @@ const filter = function(tbl: Table, by: string, matchIf: string, value: Int): Ta
   })
 }
 
-const select = function(tbl: Table, ...varNames: string[]): Table {
+const select = (tbl: Table, ...varNames: string[]): Table => {
   return tbl.map(r => {
     let selected = r.variables.filter(v => varNames.includes(v.name))
-    
+
     return {
       variables: selected,
       value: r.value
@@ -57,7 +57,7 @@ const select = function(tbl: Table, ...varNames: string[]): Table {
   })
 }
 
-const sortBy = function(tbl: Table, by: string, order: string = "asc"): Table {
+const sortBy = (tbl: Table, by: string, order: string = "asc"): Table => {
   return tbl.sort((ri, rj) => {
     let vi = {} as Variable
     let vj = {} as Variable
@@ -72,7 +72,7 @@ const sortBy = function(tbl: Table, by: string, order: string = "asc"): Table {
 
     const ri_before_rj =
       order == "desc" ? vi.value - vj.value : vj.value - vi.value
-    const ri_after_rj = 
+    const ri_after_rj =
       order == "desc" ? vj.value - vi.value : vj.value - vj.value
 
     if (ri_before_rj) return -1
@@ -98,12 +98,12 @@ const unflatten = (tbl: TableDTO): Table => {
   return tbl.map(flatRow => {
     let variables = [] as Variable[]
     let value = toInt(0)
-    
+
     Object.keys(flatRow).forEach(key => {
       if (key == 'value') value = toInt(flatRow[key])
       else variables.push({ name: key, value: toInt(flatRow[key]) })
     })
-    
+
     return {
       variables,
       value
@@ -111,7 +111,7 @@ const unflatten = (tbl: TableDTO): Table => {
   })
 }
 
-const fetchFromDB = async (db: any): Promise<Table> => {  
+const fetchFromDB = async (db: any): Promise<Table> => {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
       db.all("SELECT * FROM Data", (err: any, rows: any) => {
@@ -122,35 +122,34 @@ const fetchFromDB = async (db: any): Promise<Table> => {
   })
 }
 
-
-// try
+// define main
 const main = async () => {
   const sampleTable: Table = [
     {
       variables: [
-        {name: "a", value: 1} as Variable,
-        {name: "b", value: 1} as Variable
+        { name: "a", value: toInt(1) },
+        { name: "b", value: toInt(1) }
       ],
       value: toInt(1)
     },
     {
       variables: [
-        {name: "a", value: 1} as Variable,
-        {name: "b", value: 2} as Variable
+        { name: "a", value: toInt(1) },
+        { name: "b", value: toInt(2) }
       ],
       value: toInt(2)
     },
     {
       variables: [
-        {name: "a", value: 2} as Variable,
-        {name: "b", value: 1} as Variable
+        { name: "a", value: toInt(2) },
+        { name: "b", value: toInt(1) }
       ],
       value: toInt(3)
     },
     {
       variables: [
-        {name: "a", value: 2} as Variable,
-        {name: "b", value: 2} as Variable
+        { name: "a", value: toInt(2) },
+        { name: "b", value: toInt(2) }
       ],
       value: toInt(4)
     },
@@ -171,7 +170,6 @@ const main = async () => {
 
   db.close()
 
-
   prettyPrint("sample", sampleTable)
   prettyPrint("filtered: a == 1", filtered)
   prettyPrint("sorted by: b(asc)", sorted)
@@ -181,4 +179,5 @@ const main = async () => {
   prettyPrint("fetched from DB", fetched)
 }
 
+// run main
 main()
