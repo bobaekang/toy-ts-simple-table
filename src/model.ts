@@ -117,7 +117,7 @@ export const flatten = (tbl: Table): TableDTO => {
 
 export const unflatten = (tbl: TableDTO): Table => {
   return tbl.map(flatRow => {
-    const variables = [] as Variable[]
+    const variables: Variable[] = []
     let value = toInt(0)
 
     Object.keys(flatRow).forEach(name => {
