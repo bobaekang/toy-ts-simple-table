@@ -1,7 +1,15 @@
 import assert from 'assert'
 import { toInt } from '../src/int'
-import { Table, TableDTO, filter, sortBy, select, flatten, unflatten, fetchFromDB } from '../src/model'
-
+import {
+  Table,
+  TableDTO,
+  filter,
+  sortBy,
+  select,
+  flatten,
+  unflatten,
+  fetchFromDB,
+} from '../src/model'
 
 const sampleTable: Table = [
   {
@@ -9,28 +17,28 @@ const sampleTable: Table = [
       { name: 'A', value: toInt(1), type: 'int' },
       { name: 'B', value: toInt(1), type: 'int' },
     ],
-    value: toInt(1)
+    value: toInt(1),
   },
   {
     variables: [
       { name: 'A', value: toInt(1), type: 'int' },
       { name: 'B', value: toInt(2), type: 'int' },
     ],
-    value: toInt(2)
+    value: toInt(2),
   },
   {
     variables: [
       { name: 'A', value: toInt(2), type: 'int' },
       { name: 'B', value: toInt(1), type: 'int' },
     ],
-    value: toInt(3)
+    value: toInt(3),
   },
   {
     variables: [
       { name: 'A', value: toInt(2), type: 'int' },
       { name: 'B', value: toInt(2), type: 'int' },
     ],
-    value: toInt(4)
+    value: toInt(4),
   },
 ]
 
@@ -38,22 +46,22 @@ const sampleTableDTO: TableDTO = [
   {
     A: toInt(1),
     B: toInt(1),
-    value: toInt(1)
+    value: toInt(1),
   },
   {
     A: toInt(1),
     B: toInt(2),
-    value: toInt(2)
+    value: toInt(2),
   },
   {
     A: toInt(2),
     B: toInt(1),
-    value: toInt(3)
+    value: toInt(3),
   },
   {
     A: toInt(2),
     B: toInt(2),
-    value: toInt(4)
+    value: toInt(4),
   },
 ]
 
@@ -67,18 +75,18 @@ describe('filter', () => {
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(1)
+          value: toInt(1),
         },
         {
           variables: [
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(2)
+          value: toInt(2),
         },
       ]
 
-      assert.deepEqual(actual, expected);
+      assert.deepEqual(actual, expected)
     })
   })
 
@@ -91,18 +99,18 @@ describe('filter', () => {
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(1)
+          value: toInt(1),
         },
         {
           variables: [
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(2)
+          value: toInt(2),
         },
       ]
 
-      assert.deepEqual(actual, expected);
+      assert.deepEqual(actual, expected)
     })
   })
 
@@ -115,18 +123,18 @@ describe('filter', () => {
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(3)
+          value: toInt(3),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(4)
+          value: toInt(4),
         },
       ]
 
-      assert.deepEqual(actual, expected);
+      assert.deepEqual(actual, expected)
     })
   })
 
@@ -139,18 +147,18 @@ describe('filter', () => {
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(1)
+          value: toInt(1),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(3)
+          value: toInt(3),
         },
       ]
 
-      assert.deepEqual(actual, expected);
+      assert.deepEqual(actual, expected)
     })
   })
 
@@ -163,18 +171,18 @@ describe('filter', () => {
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(2)
+          value: toInt(2),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(4)
+          value: toInt(4),
         },
       ]
 
-      assert.deepEqual(actual, expected);
+      assert.deepEqual(actual, expected)
     })
   })
 })
@@ -189,28 +197,28 @@ describe('sortBy', () => {
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(1)
+          value: toInt(1),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(3)
+          value: toInt(3),
         },
         {
           variables: [
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(2)
+          value: toInt(2),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(4)
+          value: toInt(4),
         },
       ]
 
@@ -227,28 +235,28 @@ describe('sortBy', () => {
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(3)
+          value: toInt(3),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(4)
+          value: toInt(4),
         },
         {
           variables: [
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(1)
+          value: toInt(1),
         },
         {
           variables: [
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(2)
+          value: toInt(2),
         },
       ]
 
@@ -265,28 +273,28 @@ describe('sortBy', () => {
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(1)
+          value: toInt(1),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(3)
+          value: toInt(3),
         },
         {
           variables: [
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(2)
+          value: toInt(2),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(4)
+          value: toInt(4),
         },
       ]
 
@@ -303,28 +311,28 @@ describe('sortBy', () => {
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(4)
+          value: toInt(4),
         },
         {
           variables: [
             { name: 'A', value: toInt(2), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(3)
+          value: toInt(3),
         },
         {
           variables: [
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(2), type: 'int' },
           ],
-          value: toInt(2)
+          value: toInt(2),
         },
         {
           variables: [
             { name: 'A', value: toInt(1), type: 'int' },
             { name: 'B', value: toInt(1), type: 'int' },
           ],
-          value: toInt(1)
+          value: toInt(1),
         },
       ]
 
@@ -339,28 +347,20 @@ describe('select', () => {
       const actual = select(sampleTable, 'A')
       const expected: Table = [
         {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(1)
+          variables: [{ name: 'A', value: toInt(1), type: 'int' }],
+          value: toInt(1),
         },
         {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(2)
+          variables: [{ name: 'A', value: toInt(1), type: 'int' }],
+          value: toInt(2),
         },
         {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(3)
+          variables: [{ name: 'A', value: toInt(2), type: 'int' }],
+          value: toInt(3),
         },
         {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(4)
+          variables: [{ name: 'A', value: toInt(2), type: 'int' }],
+          value: toInt(4),
         },
       ]
 
@@ -390,7 +390,7 @@ describe('unflatten', () => {
 describe('fetchFromDB', () => {
   it('should return a proper Table fetched from a local SQLite database', async () => {
     const sqlite3 = require('sqlite3').verbose()
-    const db = new sqlite3.Database("./data.db")
+    const db = new sqlite3.Database('./data.db')
     const actual = await fetchFromDB(db)
     db.close()
 
@@ -400,14 +400,14 @@ describe('fetchFromDB', () => {
           { name: 'A', value: toInt(1), type: 'int' },
           { name: 'B', value: toInt(1), type: 'int' },
         ],
-        value: toInt(1)
+        value: toInt(1),
       },
       {
         variables: [
           { name: 'A', value: toInt(1), type: 'int' },
           { name: 'B', value: toInt(2), type: 'int' },
         ],
-        value: toInt(2)
+        value: toInt(2),
       },
     ]
 

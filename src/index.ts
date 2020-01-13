@@ -9,35 +9,35 @@ const main = (): void => {
   const sampleTable: Table = [
     {
       variables: [
-        { name: "A", value: toInt(1), type: "int" },
-        { name: "B", value: toInt(1), type: "int" }
+        { name: 'A', value: toInt(1), type: 'int' },
+        { name: 'B', value: toInt(1), type: 'int' },
       ],
-      value: toInt(1)
+      value: toInt(1),
     },
     {
       variables: [
-        { name: "A", value: toInt(1), type: "int" },
-        { name: "B", value: toInt(2), type: "int" }
+        { name: 'A', value: toInt(1), type: 'int' },
+        { name: 'B', value: toInt(2), type: 'int' },
       ],
-      value: toInt(2)
+      value: toInt(2),
     },
     {
       variables: [
-        { name: "A", value: toInt(2), type: "int" },
-        { name: "B", value: toInt(1), type: "int" }
+        { name: 'A', value: toInt(2), type: 'int' },
+        { name: 'B', value: toInt(1), type: 'int' },
       ],
-      value: toInt(3)
+      value: toInt(3),
     },
     {
       variables: [
-        { name: "A", value: toInt(2), type: "int" },
-        { name: "B", value: toInt(2), type: "int" }
+        { name: 'A', value: toInt(2), type: 'int' },
+        { name: 'B', value: toInt(2), type: 'int' },
       ],
-      value: toInt(4)
+      value: toInt(4),
     },
   ]
 
-  prettyPrint("sample", sampleTable)
+  prettyPrint('sample', sampleTable)
 }
 
 // run main

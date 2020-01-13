@@ -4,13 +4,13 @@ import { Int, toInt } from './int'
 export type IntOrString = Int | string
 
 export type Variable = {
-  name: string,
-  value: IntOrString,
+  name: string
+  value: IntOrString
   type: 'int' | 'string'
 }
 
 export type Row = {
-  variables: Variable[],
+  variables: Variable[]
   value: Int
 }
 
@@ -19,26 +19,31 @@ export type Table = Row[]
 export type TableDTO = any[]
 
 // Table functions
-export const filter = (tbl: Table, by: string, matchIf: string, value: Int): Table => {
+export const filter = (
+  tbl: Table,
+  by: string,
+  matchIf: string,
+  value: Int,
+): Table => {
   return tbl.filter(r => {
     let match = false
 
     r.variables.some(v => {
       if (v.name == by) {
         switch (matchIf) {
-          case "==":
+          case '==':
             match = v.value == value
             break
-          case "<=":
+          case '<=':
             match = v.value <= value
             break
-          case ">=":
+          case '>=':
             match = v.value >= value
             break
-          case "<":
+          case '<':
             match = v.value < value
             break
-          case ">":
+          case '>':
             match = v.value > value
         }
         return true
@@ -51,21 +56,25 @@ export const filter = (tbl: Table, by: string, matchIf: string, value: Int): Tab
 
 export const select = (tbl: Table, ...varNames: string[]): Table => {
   return tbl.map(r => {
-    let selected = r.variables.filter(v => varNames.includes(v.name))
+    const selected = r.variables.filter(v => varNames.includes(v.name))
 
     return {
       variables: selected,
-      value: r.value
+      value: r.value,
     }
   })
 }
 
-export const sortBy = (tbl: Table, by: string, order: "asc" | "desc" = "asc"): Table => {
+export const sortBy = (
+  tbl: Table,
+  by: string,
+  order: 'asc' | 'desc' = 'asc',
+): Table => {
   const compare = (a: Row, b: Row): number => {
     let va: IntOrString = ''
     let vb: IntOrString = ''
 
-    if (by === "value") {
+    if (by === 'value') {
       va = a.value
       vb = b.value
     } else {
@@ -78,8 +87,8 @@ export const sortBy = (tbl: Table, by: string, order: "asc" | "desc" = "asc"): T
       })
     }
 
-    if (va < vb) return order === "asc" ? -1 : 1
-    if (va > vb) return order === "asc" ? 1 : -1
+    if (va < vb) return order === 'asc' ? -1 : 1
+    if (va > vb) return order === 'asc' ? 1 : -1
     return 0
   }
 
@@ -105,7 +114,7 @@ export const flatten = (tbl: Table): TableDTO => {
 
 export const unflatten = (tbl: TableDTO): Table => {
   return tbl.map(flatRow => {
-    let variables = [] as Variable[]
+    const variables = [] as Variable[]
     let value = toInt(0)
 
     Object.keys(flatRow).forEach(name => {
@@ -122,14 +131,14 @@ export const unflatten = (tbl: TableDTO): Table => {
         variables.push({
           name,
           value,
-          type: isInt ? 'int' : 'string'
+          type: isInt ? 'int' : 'string',
         })
       }
     })
 
     return {
       variables,
-      value
+      value,
     }
   })
 }
@@ -137,8 +146,8 @@ export const unflatten = (tbl: TableDTO): Table => {
 export const fetchFromDB = async (db: any): Promise<Table> => {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
-      db.all("SELECT * FROM Data", (err: any, rows: any) => {
-        if (err) reject("Error: SQLite")
+      db.all('SELECT * FROM Data', (err: any, rows: any) => {
+        if (err) reject('Error: SQLite')
         else resolve(unflatten(rows))
       })
     })
