@@ -1,4 +1,5 @@
 import { Int, toInt } from './int'
+import sqlite3 from 'sqlite3'
 
 // type definitions
 export type IntOrString = Int | string
@@ -14,9 +15,11 @@ export type Row = {
   value: Int
 }
 
+export type flatRow = { [key: string]: number | string }
+
 export type Table = Row[]
 
-export type TableDTO = any[]
+export type TableDTO = flatRow[]
 
 // Table functions
 export const filter = (
@@ -100,7 +103,7 @@ export const sortBy = (
 
 export const flatten = (tbl: Table): TableDTO => {
   return tbl.map(row => {
-    const flatRow = {} as any
+    const flatRow: flatRow = {}
 
     row.variables.forEach(variable => {
       flatRow[variable.name] = variable.value
@@ -120,19 +123,21 @@ export const unflatten = (tbl: TableDTO): Table => {
     Object.keys(flatRow).forEach(name => {
       if (name == 'value') value = toInt(flatRow[name])
       else {
-        let value = flatRow[name]
-        let isInt = false
+        const value = flatRow[name]
+        const variable: Variable =
+          typeof value === 'number'
+            ? {
+                name,
+                value: toInt(value),
+                type: 'int',
+              }
+            : {
+                name,
+                value,
+                type: 'string',
+              }
 
-        if (typeof value === 'number') {
-          value = toInt(value)
-          isInt = true
-        }
-
-        variables.push({
-          name,
-          value,
-          type: isInt ? 'int' : 'string',
-        })
+        variables.push(variable)
       }
     })
 
@@ -143,10 +148,10 @@ export const unflatten = (tbl: TableDTO): Table => {
   })
 }
 
-export const fetchFromDB = async (db: any): Promise<Table> => {
+export const fetchFromDB = async (db: sqlite3.Database): Promise<Table> => {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
-      db.all('SELECT * FROM Data', (err: any, rows: any) => {
+      db.all('SELECT * FROM Data', (err: Error, rows: TableDTO) => {
         if (err) reject('Error: SQLite')
         else resolve(unflatten(rows))
       })
