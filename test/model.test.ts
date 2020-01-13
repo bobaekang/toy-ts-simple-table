@@ -6,29 +6,29 @@ import { Table, TableDTO, filter, sortBy, select, flatten, unflatten, fetchFromD
 const sampleTable: Table = [
   {
     variables: [
-      { name: 'A', value: toInt(1) },
-      { name: 'B', value: toInt(1) },
+      { name: 'A', value: toInt(1), type: 'int' },
+      { name: 'B', value: toInt(1), type: 'int' },
     ],
     value: toInt(1)
   },
   {
     variables: [
-      { name: 'A', value: toInt(1) },
-      { name: 'B', value: toInt(2) },
+      { name: 'A', value: toInt(1), type: 'int' },
+      { name: 'B', value: toInt(2), type: 'int' },
     ],
     value: toInt(2)
   },
   {
     variables: [
-      { name: 'A', value: toInt(2) },
-      { name: 'B', value: toInt(1) },
+      { name: 'A', value: toInt(2), type: 'int' },
+      { name: 'B', value: toInt(1), type: 'int' },
     ],
     value: toInt(3)
   },
   {
     variables: [
-      { name: 'A', value: toInt(2) },
-      { name: 'B', value: toInt(2) },
+      { name: 'A', value: toInt(2), type: 'int' },
+      { name: 'B', value: toInt(2), type: 'int' },
     ],
     value: toInt(4)
   },
@@ -64,15 +64,15 @@ describe('filter', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(1)
         },
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(2)
         },
@@ -88,15 +88,15 @@ describe('filter', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(1)
         },
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(2)
         },
@@ -112,15 +112,15 @@ describe('filter', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(3)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(4)
         },
@@ -136,15 +136,15 @@ describe('filter', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(1)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(3)
         },
@@ -160,15 +160,15 @@ describe('filter', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(2)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(4)
         },
@@ -186,29 +186,29 @@ describe('sortBy', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(1)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(3)
         },
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(2)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(4)
         },
@@ -224,29 +224,29 @@ describe('sortBy', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(3)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(4)
         },
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(1)
         },
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(2)
         },
@@ -262,29 +262,29 @@ describe('sortBy', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(1)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(1) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
           ],
           value: toInt(3)
         },
         {
           variables: [
-            { name: 'A', value: toInt(1) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(2)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
-            { name: 'B', value: toInt(2) },
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
           ],
           value: toInt(4)
         },
@@ -302,25 +302,25 @@ describe('select', () => {
       const expected: Table = [
         {
           variables: [
-            { name: 'A', value: toInt(1) },
+            { name: 'A', value: toInt(1), type: 'int' },
           ],
           value: toInt(1)
         },
         {
           variables: [
-            { name: 'A', value: toInt(1) },
+            { name: 'A', value: toInt(1), type: 'int' },
           ],
           value: toInt(2)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
+            { name: 'A', value: toInt(2), type: 'int' },
           ],
           value: toInt(3)
         },
         {
           variables: [
-            { name: 'A', value: toInt(2) },
+            { name: 'A', value: toInt(2), type: 'int' },
           ],
           value: toInt(4)
         },
@@ -359,15 +359,15 @@ describe('fetchFromDB', () => {
     const expected: Table = [
       {
         variables: [
-          { name: 'A', value: toInt(1) },
-          { name: 'B', value: toInt(1) },
+          { name: 'A', value: toInt(1), type: 'int' },
+          { name: 'B', value: toInt(1), type: 'int' },
         ],
         value: toInt(1)
       },
       {
         variables: [
-          { name: 'A', value: toInt(1) },
-          { name: 'B', value: toInt(2) },
+          { name: 'A', value: toInt(1), type: 'int' },
+          { name: 'B', value: toInt(2), type: 'int' },
         ],
         value: toInt(2)
       },

@@ -1,9 +1,12 @@
 import { Int, toInt } from './int'
 
 // type definitions
+export type IntOrString = Int | string
+
 export type Variable = {
   name: string,
-  value: Int
+  value: IntOrString,
+  type: 'int' | 'string'
 }
 
 export type Row = {
@@ -57,10 +60,10 @@ export const select = (tbl: Table, ...varNames: string[]): Table => {
   })
 }
 
-export const sortBy = (tbl: Table, by: string, order: string = "asc"): Table => {
+export const sortBy = (tbl: Table, by: string, order: "asc" | "desc" = "asc"): Table => {
   const compare = (a: Row, b: Row): number => {
-    let va = toInt(0)
-    let vb = toInt(0)
+    let va: IntOrString = ''
+    let vb: IntOrString = ''
 
     a.variables.forEach(v => {
       if (v.name == by) va = v.value
@@ -70,7 +73,9 @@ export const sortBy = (tbl: Table, by: string, order: string = "asc"): Table => 
       if (v.name == by) vb = v.value
     })
 
-    return order === "desc" ? vb - va : va - vb
+    if (va < vb) return order === "asc" ? -1 : 1
+    if (va > vb) return order === "asc" ? 1 : -1
+    return 0
   }
 
   return tbl
@@ -98,9 +103,23 @@ export const unflatten = (tbl: TableDTO): Table => {
     let variables = [] as Variable[]
     let value = toInt(0)
 
-    Object.keys(flatRow).forEach(key => {
-      if (key == 'value') value = toInt(flatRow[key])
-      else variables.push({ name: key, value: toInt(flatRow[key]) })
+    Object.keys(flatRow).forEach(name => {
+      if (name == 'value') value = toInt(flatRow[name])
+      else {
+        let value = flatRow[name]
+        let isInt = false
+
+        if (typeof value === 'number') {
+          value = toInt(value)
+          isInt = true
+        }
+
+        variables.push({
+          name,
+          value,
+          type: isInt ? 'int' : 'string'
+        })
+      }
     })
 
     return {
