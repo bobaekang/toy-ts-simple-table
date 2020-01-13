@@ -65,13 +65,18 @@ export const sortBy = (tbl: Table, by: string, order: "asc" | "desc" = "asc"): T
     let va: IntOrString = ''
     let vb: IntOrString = ''
 
-    a.variables.forEach(v => {
-      if (v.name == by) va = v.value
-    })
+    if (by === "value") {
+      va = a.value
+      vb = b.value
+    } else {
+      a.variables.forEach(v => {
+        if (v.name == by) va = v.value
+      })
 
-    b.variables.forEach(v => {
-      if (v.name == by) vb = v.value
-    })
+      b.variables.forEach(v => {
+        if (v.name == by) vb = v.value
+      })
+    }
 
     if (va < vb) return order === "asc" ? -1 : 1
     if (va > vb) return order === "asc" ? 1 : -1

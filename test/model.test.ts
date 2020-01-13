@@ -293,6 +293,44 @@ describe('sortBy', () => {
       assert.deepEqual(actual, expected)
     })
   })
+
+  describe('by: value, order: desc', () => {
+    it('should return a Table sorted by value in descending order', () => {
+      const actual = sortBy(sampleTable, 'value', 'desc')
+      const expected: Table = [
+        {
+          variables: [
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
+          ],
+          value: toInt(4)
+        },
+        {
+          variables: [
+            { name: 'A', value: toInt(2), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
+          ],
+          value: toInt(3)
+        },
+        {
+          variables: [
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(2), type: 'int' },
+          ],
+          value: toInt(2)
+        },
+        {
+          variables: [
+            { name: 'A', value: toInt(1), type: 'int' },
+            { name: 'B', value: toInt(1), type: 'int' },
+          ],
+          value: toInt(1)
+        },
+      ]
+
+      assert.deepEqual(actual, expected)
+    })
+  })
 })
 
 describe('select', () => {
