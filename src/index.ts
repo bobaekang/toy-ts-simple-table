@@ -2,9 +2,10 @@ import { toInt } from './int'
 import { Table } from './model'
 
 // define main
-const main = (): void => {
-  const prettyPrint = (name: string, obj: Table): void =>
+function main(): void {
+  const prettyPrint = (name: string, obj: Table): void => {
     console.log(name + '\n' + JSON.stringify(obj, null, 2) + '\n')
+  }
 
   const sampleTable: Table = [
     {
