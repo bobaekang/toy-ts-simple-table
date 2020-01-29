@@ -1,11 +1,9 @@
 import sqlite3 from 'sqlite3'
 
 // type definitions
-export type NumOrString = number | string
-
 export type Variable = {
   name: string
-  value: NumOrString
+  value: number | string
 }
 
 export type Row = Variable[]
@@ -64,8 +62,8 @@ export function sortBy(
   order: 'asc' | 'desc' = 'asc',
 ): Table {
   const compare = (a: Row, b: Row): number => {
-    let va: NumOrString = ''
-    let vb: NumOrString = ''
+    let va: number | string = ''
+    let vb: number | string = ''
 
     a.forEach(v => {
       if (v.name == by) va = v.value
