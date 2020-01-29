@@ -1,5 +1,4 @@
 import assert from 'assert'
-import { toInt } from '../src/int'
 import {
   Table,
   TableDTO,
@@ -12,34 +11,26 @@ import {
 } from '../src/model'
 
 const sampleTable: Table = [
-  {
-    variables: [
-      { name: 'A', value: toInt(1), type: 'int' },
-      { name: 'B', value: toInt(1), type: 'int' },
-    ],
-    value: toInt(1),
-  },
-  {
-    variables: [
-      { name: 'A', value: toInt(1), type: 'int' },
-      { name: 'B', value: toInt(2), type: 'int' },
-    ],
-    value: toInt(2),
-  },
-  {
-    variables: [
-      { name: 'A', value: toInt(2), type: 'int' },
-      { name: 'B', value: toInt(1), type: 'int' },
-    ],
-    value: toInt(3),
-  },
-  {
-    variables: [
-      { name: 'A', value: toInt(2), type: 'int' },
-      { name: 'B', value: toInt(2), type: 'int' },
-    ],
-    value: toInt(4),
-  },
+  [
+    { name: 'A', value: 1, type: 'number' },
+    { name: 'B', value: 1, type: 'number' },
+    { name: 'value', value: 1, type: 'number' },
+  ],
+  [
+    { name: 'A', value: 1, type: 'number' },
+    { name: 'B', value: 2, type: 'number' },
+    { name: 'value', value: 2, type: 'number' },
+  ],
+  [
+    { name: 'A', value: 2, type: 'number' },
+    { name: 'B', value: 1, type: 'number' },
+    { name: 'value', value: 3, type: 'number' },
+  ],
+  [
+    { name: 'A', value: 2, type: 'number' },
+    { name: 'B', value: 2, type: 'number' },
+    { name: 'value', value: 4, type: 'number' },
+  ],
 ]
 
 const sampleTableDTO: TableDTO = [
@@ -52,22 +43,18 @@ const sampleTableDTO: TableDTO = [
 describe('filter', () => {
   describe('by: A, matchIf: ==, value: 1', () => {
     it('should return a filtered Table only with Rows where variable A == 1', () => {
-      const actual = filter(sampleTable, 'A', '==', toInt(1))
+      const actual = filter(sampleTable, 'A', '==', 1)
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(1),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(2),
-        },
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 1, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 2, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -76,22 +63,18 @@ describe('filter', () => {
 
   describe('by: A, matchIf: <=, value: 1', () => {
     it('should return a filtered Table only with Rows where variable A <= 1', () => {
-      const actual = filter(sampleTable, 'A', '<=', toInt(1))
+      const actual = filter(sampleTable, 'A', '<=', 1)
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(1),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(2),
-        },
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 1, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 2, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -100,22 +83,18 @@ describe('filter', () => {
 
   describe('by: A, matchIf: >=, value: 2', () => {
     it('should return a filtered Table only with Rows where variable A >= 2', () => {
-      const actual = filter(sampleTable, 'A', '>=', toInt(2))
+      const actual = filter(sampleTable, 'A', '>=', 2)
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(3),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(4),
-        },
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 3, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 4, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -124,22 +103,18 @@ describe('filter', () => {
 
   describe('by: B, matchIf: <, value: 2', () => {
     it('should return a filtered Table only with Rows where variable B < 2', () => {
-      const actual = filter(sampleTable, 'B', '<', toInt(2))
+      const actual = filter(sampleTable, 'B', '<', 2)
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(1),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(3),
-        },
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 1, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 3, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -148,22 +123,18 @@ describe('filter', () => {
 
   describe('by: B, matchIf: >, value: 1', () => {
     it('should return a filtered Table only with Rows where variable B > 1', () => {
-      const actual = filter(sampleTable, 'B', '>', toInt(1))
+      const actual = filter(sampleTable, 'B', '>', 1)
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(2),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(4),
-        },
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 2, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 4, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -176,34 +147,26 @@ describe('sortBy', () => {
     it('should return a Table sorted by B in ascending order', () => {
       const actual = sortBy(sampleTable, 'B')
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(1),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(3),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(2),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(4),
-        },
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 1, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 3, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 2, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 4, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -214,34 +177,26 @@ describe('sortBy', () => {
     it('should return a Table sorted by A in descending order', () => {
       const actual = sortBy(sampleTable, 'A', 'desc')
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(3),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(4),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(1),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(2),
-        },
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 3, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 4, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 1, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 2, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -252,34 +207,26 @@ describe('sortBy', () => {
     it('should return a Table sorted by B in ascending order', () => {
       const actual = sortBy(sampleTable, 'B', 'asc')
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(1),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(3),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(2),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(4),
-        },
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 1, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 3, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 2, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 4, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -290,34 +237,26 @@ describe('sortBy', () => {
     it('should return a Table sorted by value in descending order', () => {
       const actual = sortBy(sampleTable, 'value', 'desc')
       const expected: Table = [
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(4),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(2), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(3),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(2), type: 'int' },
-          ],
-          value: toInt(2),
-        },
-        {
-          variables: [
-            { name: 'A', value: toInt(1), type: 'int' },
-            { name: 'B', value: toInt(1), type: 'int' },
-          ],
-          value: toInt(1),
-        },
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 4, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 3, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 2, type: 'number' },
+          { name: 'value', value: 2, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'B', value: 1, type: 'number' },
+          { name: 'value', value: 1, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -328,24 +267,24 @@ describe('sortBy', () => {
 describe('select', () => {
   describe('varNames: A', () => {
     it('should return a Table with variable A only', () => {
-      const actual = select(sampleTable, 'A')
+      const actual = select(sampleTable, 'A', 'value')
       const expected: Table = [
-        {
-          variables: [{ name: 'A', value: toInt(1), type: 'int' }],
-          value: toInt(1),
-        },
-        {
-          variables: [{ name: 'A', value: toInt(1), type: 'int' }],
-          value: toInt(2),
-        },
-        {
-          variables: [{ name: 'A', value: toInt(2), type: 'int' }],
-          value: toInt(3),
-        },
-        {
-          variables: [{ name: 'A', value: toInt(2), type: 'int' }],
-          value: toInt(4),
-        },
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'value', value: 1, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 1, type: 'number' },
+          { name: 'value', value: 2, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'value', value: 3, type: 'number' },
+        ],
+        [
+          { name: 'A', value: 2, type: 'number' },
+          { name: 'value', value: 4, type: 'number' },
+        ],
       ]
 
       assert.deepEqual(actual, expected)
@@ -379,20 +318,16 @@ describe('fetchFromDB', () => {
     db.close()
 
     const expected: Table = [
-      {
-        variables: [
-          { name: 'A', value: toInt(1), type: 'int' },
-          { name: 'B', value: toInt(1), type: 'int' },
-        ],
-        value: toInt(1),
-      },
-      {
-        variables: [
-          { name: 'A', value: toInt(1), type: 'int' },
-          { name: 'B', value: toInt(2), type: 'int' },
-        ],
-        value: toInt(2),
-      },
+      [
+        { name: 'A', value: 1, type: 'number' },
+        { name: 'B', value: 1, type: 'number' },
+        { name: 'value', value: 1, type: 'number' },
+      ],
+      [
+        { name: 'A', value: 1, type: 'number' },
+        { name: 'B', value: 2, type: 'number' },
+        { name: 'value', value: 2, type: 'number' },
+      ],
     ]
 
     assert.deepEqual(actual, expected)

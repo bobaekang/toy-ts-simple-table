@@ -1,4 +1,3 @@
-import { toInt } from './int'
 import { Table } from './model'
 
 // define main
@@ -8,34 +7,26 @@ function main(): void {
   }
 
   const sampleTable: Table = [
-    {
-      variables: [
-        { name: 'A', value: toInt(1), type: 'int' },
-        { name: 'B', value: toInt(1), type: 'int' },
-      ],
-      value: toInt(1),
-    },
-    {
-      variables: [
-        { name: 'A', value: toInt(1), type: 'int' },
-        { name: 'B', value: toInt(2), type: 'int' },
-      ],
-      value: toInt(2),
-    },
-    {
-      variables: [
-        { name: 'A', value: toInt(2), type: 'int' },
-        { name: 'B', value: toInt(1), type: 'int' },
-      ],
-      value: toInt(3),
-    },
-    {
-      variables: [
-        { name: 'A', value: toInt(2), type: 'int' },
-        { name: 'B', value: toInt(2), type: 'int' },
-      ],
-      value: toInt(4),
-    },
+    [
+      { name: 'A', value: 1, type: 'number' },
+      { name: 'B', value: 1, type: 'number' },
+      { name: 'value', value: 1, type: 'number' },
+    ],
+    [
+      { name: 'A', value: 1, type: 'number' },
+      { name: 'B', value: 2, type: 'number' },
+      { name: 'value', value: 2, type: 'number' },
+    ],
+    [
+      { name: 'A', value: 2, type: 'number' },
+      { name: 'B', value: 1, type: 'number' },
+      { name: 'value', value: 3, type: 'number' },
+    ],
+    [
+      { name: 'A', value: 2, type: 'number' },
+      { name: 'B', value: 2, type: 'number' },
+      { name: 'value', value: 4, type: 'number' },
+    ],
   ]
 
   prettyPrint('sample', sampleTable)
