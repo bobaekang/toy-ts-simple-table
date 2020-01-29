@@ -8,24 +8,24 @@ function main(): void {
 
   const sampleTable: Table = [
     [
-      { name: 'A', value: 1, type: 'number' },
-      { name: 'B', value: 1, type: 'number' },
-      { name: 'value', value: 1, type: 'number' },
+      { name: 'A', value: 1 },
+      { name: 'B', value: 1 },
+      { name: 'value', value: 1 },
     ],
     [
-      { name: 'A', value: 1, type: 'number' },
-      { name: 'B', value: 2, type: 'number' },
-      { name: 'value', value: 2, type: 'number' },
+      { name: 'A', value: 1 },
+      { name: 'B', value: 2 },
+      { name: 'value', value: 2 },
     ],
     [
-      { name: 'A', value: 2, type: 'number' },
-      { name: 'B', value: 1, type: 'number' },
-      { name: 'value', value: 3, type: 'number' },
+      { name: 'A', value: 2 },
+      { name: 'B', value: 1 },
+      { name: 'value', value: 3 },
     ],
     [
-      { name: 'A', value: 2, type: 'number' },
-      { name: 'B', value: 2, type: 'number' },
-      { name: 'value', value: 4, type: 'number' },
+      { name: 'A', value: 2 },
+      { name: 'B', value: 2 },
+      { name: 'value', value: 4 },
     ],
   ]
 

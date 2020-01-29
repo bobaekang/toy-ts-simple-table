@@ -6,7 +6,6 @@ export type NumOrString = number | string
 export type Variable = {
   name: string
   value: NumOrString
-  type: 'number' | 'string'
 }
 
 export type Row = Variable[]
@@ -104,10 +103,7 @@ export function unflatten(tbl: TableDTO): Table {
     const row: Row = []
 
     Object.keys(flatRow).forEach(name => {
-      const value = flatRow[name]
-      const type = typeof value === 'number' ? 'number' : 'string'
-
-      row.push({ name, value, type })
+      row.push({ name, value: flatRow[name] })
     })
 
     return row

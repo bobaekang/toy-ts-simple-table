@@ -12,24 +12,24 @@ import {
 
 const sampleTable: Table = [
   [
-    { name: 'A', value: 1, type: 'number' },
-    { name: 'B', value: 1, type: 'number' },
-    { name: 'value', value: 1, type: 'number' },
+    { name: 'A', value: 1 },
+    { name: 'B', value: 1 },
+    { name: 'value', value: 1 },
   ],
   [
-    { name: 'A', value: 1, type: 'number' },
-    { name: 'B', value: 2, type: 'number' },
-    { name: 'value', value: 2, type: 'number' },
+    { name: 'A', value: 1 },
+    { name: 'B', value: 2 },
+    { name: 'value', value: 2 },
   ],
   [
-    { name: 'A', value: 2, type: 'number' },
-    { name: 'B', value: 1, type: 'number' },
-    { name: 'value', value: 3, type: 'number' },
+    { name: 'A', value: 2 },
+    { name: 'B', value: 1 },
+    { name: 'value', value: 3 },
   ],
   [
-    { name: 'A', value: 2, type: 'number' },
-    { name: 'B', value: 2, type: 'number' },
-    { name: 'value', value: 4, type: 'number' },
+    { name: 'A', value: 2 },
+    { name: 'B', value: 2 },
+    { name: 'value', value: 4 },
   ],
 ]
 
@@ -46,14 +46,14 @@ describe('filter', () => {
       const actual = filter(sampleTable, 'A', '==', 1)
       const expected: Table = [
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 1, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 1 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 2, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 2 },
         ],
       ]
 
@@ -66,14 +66,14 @@ describe('filter', () => {
       const actual = filter(sampleTable, 'A', '<=', 1)
       const expected: Table = [
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 1, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 1 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 2, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 2 },
         ],
       ]
 
@@ -86,14 +86,14 @@ describe('filter', () => {
       const actual = filter(sampleTable, 'A', '>=', 2)
       const expected: Table = [
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 3, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 3 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 4, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 4 },
         ],
       ]
 
@@ -106,14 +106,14 @@ describe('filter', () => {
       const actual = filter(sampleTable, 'B', '<', 2)
       const expected: Table = [
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 1, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 1 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 3, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 3 },
         ],
       ]
 
@@ -126,14 +126,14 @@ describe('filter', () => {
       const actual = filter(sampleTable, 'B', '>', 1)
       const expected: Table = [
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 2, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 2 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 4, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 4 },
         ],
       ]
 
@@ -148,24 +148,24 @@ describe('sortBy', () => {
       const actual = sortBy(sampleTable, 'B')
       const expected: Table = [
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 1, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 1 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 3, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 3 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 2, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 2 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 4, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 4 },
         ],
       ]
 
@@ -178,24 +178,24 @@ describe('sortBy', () => {
       const actual = sortBy(sampleTable, 'A', 'desc')
       const expected: Table = [
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 3, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 3 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 4, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 4 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 1, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 1 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 2, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 2 },
         ],
       ]
 
@@ -208,24 +208,24 @@ describe('sortBy', () => {
       const actual = sortBy(sampleTable, 'B', 'asc')
       const expected: Table = [
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 1, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 1 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 3, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 3 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 2, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 2 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 4, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 4 },
         ],
       ]
 
@@ -238,24 +238,24 @@ describe('sortBy', () => {
       const actual = sortBy(sampleTable, 'value', 'desc')
       const expected: Table = [
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 4, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 4 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 3, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 3 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 2, type: 'number' },
-          { name: 'value', value: 2, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 2 },
+          { name: 'value', value: 2 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'B', value: 1, type: 'number' },
-          { name: 'value', value: 1, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'B', value: 1 },
+          { name: 'value', value: 1 },
         ],
       ]
 
@@ -270,20 +270,20 @@ describe('select', () => {
       const actual = select(sampleTable, 'A', 'value')
       const expected: Table = [
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'value', value: 1, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'value', value: 1 },
         ],
         [
-          { name: 'A', value: 1, type: 'number' },
-          { name: 'value', value: 2, type: 'number' },
+          { name: 'A', value: 1 },
+          { name: 'value', value: 2 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'value', value: 3, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'value', value: 3 },
         ],
         [
-          { name: 'A', value: 2, type: 'number' },
-          { name: 'value', value: 4, type: 'number' },
+          { name: 'A', value: 2 },
+          { name: 'value', value: 4 },
         ],
       ]
 
@@ -319,14 +319,14 @@ describe('fetchFromDB', () => {
 
     const expected: Table = [
       [
-        { name: 'A', value: 1, type: 'number' },
-        { name: 'B', value: 1, type: 'number' },
-        { name: 'value', value: 1, type: 'number' },
+        { name: 'A', value: 1 },
+        { name: 'B', value: 1 },
+        { name: 'value', value: 1 },
       ],
       [
-        { name: 'A', value: 1, type: 'number' },
-        { name: 'B', value: 2, type: 'number' },
-        { name: 'value', value: 2, type: 'number' },
+        { name: 'A', value: 1 },
+        { name: 'B', value: 2 },
+        { name: 'value', value: 2 },
       ],
     ]
 
