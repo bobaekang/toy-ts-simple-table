@@ -1,18 +1,9 @@
 import sqlite3 from 'sqlite3'
 
 // type definitions
-export type Variable = {
-  name: string
-  value: number | string
-}
-
-export type Row = Variable[]
-
-export type flatRow = { [key: string]: number | string }
+export type Row = { [key: string]: number | string }
 
 export type Table = Row[]
-
-export type TableDTO = flatRow[]
 
 // Table functions
 export function filter(
@@ -21,39 +12,11 @@ export function filter(
   matchIf: '==' | '<=' | '>=' | '<' | '>',
   value: number,
 ): Table {
-  return tbl.filter(r => {
-    let match = false
-
-    r.some(v => {
-      if (v.name == by) {
-        switch (matchIf) {
-          case '==':
-            match = v.value == value
-            break
-          case '<=':
-            match = v.value <= value
-            break
-          case '>=':
-            match = v.value >= value
-            break
-          case '<':
-            match = v.value < value
-            break
-          case '>':
-            match = v.value > value
-        }
-        return true
-      }
-    })
-
-    return match
-  })
+  return tbl.filter(row => eval(`${row[by]} ${matchIf} ${value}`))
 }
 
-export function select(tbl: Table, ...varNames: string[]): Table {
-  return tbl.map(r => {
-    return r.filter(v => varNames.includes(v.name))
-  })
+export function select(tbl: Table, ...cols: string[]): Table {
+  return tbl.map(row => Object.assign({}, ...cols.map(c => ({ [c]: row[c] }))))
 }
 
 export function sortBy(
@@ -62,19 +25,8 @@ export function sortBy(
   order: 'asc' | 'desc' = 'asc',
 ): Table {
   const compare = (a: Row, b: Row): number => {
-    let va: number | string = ''
-    let vb: number | string = ''
-
-    a.forEach(v => {
-      if (v.name == by) va = v.value
-    })
-
-    b.forEach(v => {
-      if (v.name == by) vb = v.value
-    })
-
-    if (va < vb) return order === 'asc' ? -1 : 1
-    if (va > vb) return order === 'asc' ? 1 : -1
+    if (a[by] < b[by]) return order === 'asc' ? -1 : 1
+    if (a[by] > b[by]) return order === 'asc' ? 1 : -1
     return 0
   }
 
@@ -84,36 +36,12 @@ export function sortBy(
     .map(({ row }) => row)
 }
 
-export function flatten(tbl: Table): TableDTO {
-  return tbl.map(row => {
-    const flatRow: flatRow = {}
-
-    row.forEach(variable => {
-      flatRow[variable.name] = variable.value
-    })
-
-    return flatRow
-  })
-}
-
-export function unflatten(tbl: TableDTO): Table {
-  return tbl.map(flatRow => {
-    const row: Row = []
-
-    Object.keys(flatRow).forEach(name => {
-      row.push({ name, value: flatRow[name] })
-    })
-
-    return row
-  })
-}
-
 export async function fetchFromDB(db: sqlite3.Database): Promise<Table> {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
-      db.all('SELECT * FROM Data', (err: Error, rows: TableDTO) => {
+      db.all('SELECT * FROM Data', (err: Error, tbl: Table) => {
         if (err) reject('Error: SQLite')
-        else resolve(unflatten(rows))
+        else resolve(tbl)
       })
     })
   })
